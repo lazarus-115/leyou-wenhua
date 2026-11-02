@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>流程向导 · 乐游文华</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="guide">
+  <div class="leaf-field" id="leafField"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <span class="leaf-icon brand-leaf"></span>
+        <span>乐游<em>文华</em></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="guide.html" class="active">流程向导</a>
+        <a href="overview.html">任务总览</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="guide">
+    <div class="container">
+      <div class="progress-head">
+        <p class="p-label">第 <strong id="curIdx">1</strong> / <span id="totalCount">8</span> 站</p>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      </div>
+
+      <div class="task-wrap">
+        <div class="task-card" id="taskCard"></div>
+      </div>
+
+      <div class="task-nav">
+        <button class="btn btn-ghost" id="prevBtn">← 上一站</button>
+        <div class="dots" id="dots"></div>
+        <button class="btn btn-primary" id="nextBtn">下一站 →</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="leaf-icon f-leaf"></div>
+    <p>乐游文华 · 文华学院</p>
+    <p id="footDate"></p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
