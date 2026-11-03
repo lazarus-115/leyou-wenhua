@@ -12,19 +12,23 @@
   <header class="nav">
     <div class="container nav-inner">
       <a class="brand" href="index.html">
-        <span class="leaf-icon brand-leaf"></span>
+        <img class="brand-logo" src="images/logo.png" alt="团学标志">
         <span>乐游<em>文华</em></span>
       </a>
       <nav class="nav-links">
         <a href="index.html" class="active">首页</a>
         <a href="guide.html">流程向导</a>
         <a href="overview.html">任务总览</a>
+        <a href="map.html" class="map-entry">🗺 校园地图</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
+      <img class="deco-leaf deco-1" src="images/maple-leaf.png" alt="">
+      <img class="deco-leaf deco-2" src="images/maple-leaf.png" alt="">
+      <img class="deco-leaf deco-3" src="images/maple-leaf.png" alt="">
       <div class="container">
         <span class="badge" id="heroBadge"></span>
         <h1 id="heroTitle">乐游文华</h1>
@@ -35,6 +39,19 @@
           <a class="btn btn-ghost" href="overview.html">查看任务总览</a>
         </div>
         <div class="info-strip" id="infoStrip"></div>
+      </div>
+    </section>
+
+    <section class="section lottery" id="lottery">
+      <div class="container">
+        <h2 class="section-title">抽取你的专属路线</h2>
+        <p class="section-sub">转一转，随机抽出一条巡游路线</p>
+        <div class="wheel-wrap">
+          <div class="wheel-pointer">▼</div>
+          <div class="wheel" id="wheel"></div>
+          <button class="btn btn-primary wheel-btn" id="spinBtn">🎯 开始抽取</button>
+        </div>
+        <p class="wheel-hint">抽中后，流程向导会按这条路线的顺序带你闯关</p>
       </div>
     </section>
 
@@ -72,6 +89,21 @@
     <p>乐游文华 · 文华学院</p>
     <p id="footDate"></p>
   </footer>
+
+  <!-- 抽取结果弹窗 -->
+  <div class="modal" id="resultModal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-card">
+      <div class="modal-emoji" id="modalEmoji">🍁</div>
+      <h3 class="modal-title">你抽到了</h3>
+      <div class="modal-route" id="modalRoute">枫红之路</div>
+      <p class="modal-order" id="modalOrder"></p>
+      <div class="modal-actions">
+        <a class="btn btn-primary" id="goRoute" href="guide.html">进入这条路线 →</a>
+        <button class="btn btn-ghost" id="reSpin">再抽一次</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

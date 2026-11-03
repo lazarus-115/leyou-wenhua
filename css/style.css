@@ -58,15 +58,14 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .leaf {
   position: absolute;
   top: -60px;
-  color: var(--red);
-  opacity: 0.18;
+  opacity: 0.4;
   animation: leafFall linear infinite;
   user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(140, 30, 30, 0.25));
 }
-.leaf svg { display: block; }
 @keyframes leafFall {
   0%   { transform: translateY(-8vh) rotate(0deg); opacity: 0; }
-  8%   { opacity: 0.22; }
+  8%   { opacity: 0.4; }
   100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
 }
 
@@ -94,6 +93,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   letter-spacing: 1px;
 }
 .brand .brand-leaf { color: var(--red); width: 26px; height: 26px; }
+.brand .brand-logo { height: 34px; width: auto; object-fit: contain; }
 .brand em { font-style: normal; color: var(--orange); }
 .nav-links { display: flex; gap: 6px; }
 .nav-links a {
@@ -139,8 +139,11 @@ button { font-family: inherit; cursor: pointer; border: none; }
 /* ---------- 首页 ---------- */
 .hero {
   position: relative;
-  padding: 72px 0 56px;
+  padding: 96px 0 80px;
   text-align: center;
+  background:
+    linear-gradient(rgba(255, 247, 238, 0.8), rgba(255, 247, 238, 0.8)),
+    url("../images/bg-hero.jpg") center/cover no-repeat;
 }
 .hero .badge {
   display: inline-flex;
@@ -178,6 +181,20 @@ button { font-family: inherit; cursor: pointer; border: none; }
   font-size: 16px;
 }
 .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* 枫叶装饰元素（静态摆放） */
+.deco-leaf {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  opacity: 0.3;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 4px 8px rgba(140, 30, 30, 0.2));
+}
+.hero .deco-1 { top: 24px; left: 5%; transform: rotate(-22deg); }
+.hero .deco-2 { top: 110px; right: 6%; transform: rotate(28deg); }
+.hero .deco-3 { bottom: 24px; left: 12%; transform: rotate(15deg); opacity: 0.22; }
 
 /* 信息条 */
 .info-strip {
@@ -390,7 +407,189 @@ button { font-family: inherit; cursor: pointer; border: none; }
   .brand { font-size: 17px; }
   .nav-links a { padding: 6px 12px; font-size: 13px; }
   .hero { padding: 48px 0 40px; }
+  .deco-leaf { width: 46px; height: 46px; opacity: 0.2; }
   .task-body { padding: 26px 22px; }
   .task-nav { flex-direction: column; }
   .task-nav .dots { order: 3; }
+}
+
+/* ---------- 转盘抽取（首页） ---------- */
+.lottery { padding-top: 20px; }
+.wheel-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 8px auto 0;
+}
+.wheel {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  box-shadow: 0 0 0 6px var(--orange-light), var(--shadow-lg);
+  will-change: transform;
+  /* 扇形背景 conic-gradient 由 JS 根据路线数量生成 */
+}
+.wheel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--shadow);
+  z-index: 2;
+}
+.wheel-pointer {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 30px solid var(--red-dark);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.25));
+}
+.wheel-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  z-index: 1;
+}
+.wheel-btn {
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+.wheel-hint { text-align: center; color: var(--ink-soft); margin-top: 52px; }
+
+/* ---------- 结果弹窗 ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.modal.open { visibility: visible; opacity: 1; }
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(58, 36, 23, 0.45);
+  backdrop-filter: blur(3px);
+}
+.modal-card {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 40px 36px;
+  text-align: center;
+  max-width: 460px;
+  width: 100%;
+  animation: cardIn 0.35s ease;
+}
+.modal-emoji { font-size: 54px; margin-bottom: 6px; }
+.modal-title { color: var(--ink-soft); font-weight: 700; font-size: 15px; letter-spacing: 2px; }
+.modal-route {
+  font-size: clamp(28px, 7vw, 38px);
+  font-weight: 900;
+  margin: 6px 0 12px;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.modal-order {
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 24px;
+}
+.modal-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* ---------- 向导页路线标签 ---------- */
+.route-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: var(--bg-warm);
+  color: var(--red-dark);
+  font-weight: 700;
+  font-size: 14px;
+  border: 1px solid var(--line);
+  margin-bottom: 12px;
+}
+
+/* ---------- 转盘响应式 ---------- */
+@media (max-width: 560px) {
+  .wheel-wrap { width: 260px; height: 260px; }
+  .wheel-label { font-size: 13px; }
+}
+
+/* ---------- 右上角地图入口 ---------- */
+.nav-links a.map-entry {
+  margin-left: 8px;
+  background: var(--grad);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+.nav-links a.map-entry:hover {
+  color: #fff;
+  background: var(--grad);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---------- 地图页 ---------- */
+.map-page {
+  padding: 44px 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.map-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 6px solid #fff;
+  background: var(--card);
+}
+.map-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 地图入口移动端收紧 */
+@media (max-width: 560px) {
+  .nav-links a.map-entry { padding: 6px 10px; }
+}
+
+/* ---------- 页脚策划人（低调展示） ---------- */
+.footer-crew {
+  margin-top: 8px;
+  font-size: 12px;
+  opacity: 0.72;
+  letter-spacing: 1px;
 }
