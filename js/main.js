@@ -325,10 +325,40 @@ function renderTask() {
   card.style.animation = "";
 }
 
+// ---------- 导航栏移动端汉堡菜单 ----------
+function initNav() {
+  const nav = document.querySelector(".nav");
+  const toggle = document.getElementById("navToggle");
+  if (!nav || !toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", open ? "关闭菜单" : "打开菜单");
+  });
+
+  // 点击菜单里的链接后自动收起
+  nav.querySelectorAll(".nav-links a").forEach((a) => {
+    a.addEventListener("click", () => closeNav());
+  });
+
+  // 点击页面其它区域收起
+  document.addEventListener("click", (e) => {
+    if (!nav.contains(e.target)) closeNav();
+  });
+
+  function closeNav() {
+    nav.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "打开菜单");
+  }
+}
+
 // ---------- 启动 ----------
 document.addEventListener("DOMContentLoaded", () => {
   const page = document.body.dataset.page;
   initCommon();
+  initNav();
   if (page === "home") {
     renderHome();
     renderWheel();

@@ -593,3 +593,63 @@ button { font-family: inherit; cursor: pointer; border: none; }
   opacity: 0.72;
   letter-spacing: 1px;
 }
+
+/* ---------- 导航栏移动端汉堡菜单 ---------- */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 10px 9px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--red-dark);
+  transition: transform .25s ease, opacity .2s ease;
+}
+.nav.open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav.open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav.open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    padding: 12px 5vw 20px;
+    background: rgba(255, 247, 238, 0.98);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity .22s ease, transform .22s ease, visibility .22s ease;
+  }
+  .nav.open .nav-links {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-links a {
+    text-align: center;
+    padding: 13px 16px;
+    font-size: 16px;
+  }
+  .nav-links a.map-entry { margin-left: 0; padding: 13px 16px; }
+}
