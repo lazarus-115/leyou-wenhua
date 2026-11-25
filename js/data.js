@@ -28,7 +28,7 @@ const ACTIVITIES = [
     description: "借助垫板交替铺路，全队接力渡过“河流”。",
     rules: "每队队员依次上场，借助三块垫板交替铺路前进，行进途中双脚不可直接落地，落地则返回起点重新出发。队员完成赛道后将垫板交接给下一位队友，直至全队全部完成。",
     passCondition: "全队队员全部完成接力，即为闯关成功。",
-    image: "",
+    image: "images/xiaoxunshi.jpg",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ const ACTIVITIES = [
     description: "蒙上双眼，靠队友轮流的语言指引绕过障碍。",
     rules: "队内依次轮流，每次选出 1 名队员蒙眼，其余队友留在安全区域，轮流开口发出指令，不可一人全程指挥；所有人不能上手触碰、不能代替蒙眼队员移动。蒙眼队员依靠大家轮流的语言指引，绕过障碍物抵达终点。",
     passCondition: "全队每人都完成一轮挑战，即为闯关成功。",
-    image: "",
+    image: "images/xiaoxunshi.jpg",
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const ACTIVITIES = [
     description: "两人比划、队友猜词，考验团队默契。",
     rules: "队内选派两名队员共同看词比划，不能说出词语中的字，其余队友猜词。",
     passCondition: "限时猜对指定数量，即可通关。",
-    image: "https://naistudio.art/assets/uploads/wenhua-4d1382f154.jpg",
+    image: "images/qinrenpo.jpg",
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ const ACTIVITIES = [
     description: "每人手拿一本书，接力运送乒乓球到终点。",
     rules: "每队 5 人，每人手拿一本书，依次衔接，将一颗乒乓球从起点平稳运送至终点的容器中，小球中途落地需重新开始。",
     passCondition: "成功送达终点，即可通关。",
-    image: "https://naistudio.art/assets/uploads/wenhua-4d1382f154.jpg",
+    image: "images/qinrenpo.jpg",
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ const ACTIVITIES = [
     description: "记忆历史事件顺序，合力调整卡片排列。",
     rules: "游戏正式开始前，全队统一观看顺序表 30 秒；随后收起表格。轮到每位队员上前调整卡片前，该队员可单独观看 15 秒顺序表。队员依次上前调整卡片位置，全队可沟通讨论。",
     passCondition: "所有历史事件按先后顺序排列正确，即为闯关成功。",
-    image: "",
+    image: "images/gongcheng.jpg",
   },
   {
     id: 6,
@@ -73,7 +73,7 @@ const ACTIVITIES = [
     description: "用工具夹取乒乓球，全队接力累计积分。",
     rules: "队伍成员依次接力上场夹取乒乓球，每支队伍单独计时，选手在规定时长内使用工具夹球，按全队成功夹取的乒乓球总数累计积分。",
     passCondition: "积分达到标准，即可通关。",
-    image: "",
+    image: "images/gongcheng.jpg",
   },
   {
     id: 7,
@@ -100,7 +100,7 @@ const ACTIVITIES = [
     description: "蒙眼穿越地雷阵，队友一人一句指挥。",
     rules: "一名同学蒙眼（可用一次性口罩当作眼罩，游戏完成可带走口罩），正面朝地雷阵，由余下小组同学一人一句指挥，从地雷阵起点走到终点，其间碰倒一个瓶子扣一分，总分十分。",
     passCondition: "成绩达到标准即可通关（有 2 至 3 次挑战机会，取最好成绩）。",
-    image: "",
+    image: "images/duzhilou.jpg",
   },
   {
     id: 10,
@@ -109,7 +109,7 @@ const ACTIVITIES = [
     description: "用吸管吹棉签，击中纸杯靶子得分。",
     rules: "准备 10 到 15 个纸杯垒成三角形结构，每个纸杯代表一个靶点。玩家站在 1.5 米外，用吸管作为投掷工具，将棉签吹向纸杯靶子。边缘以外纸杯每个 2 分，边缘位置纸杯每个 1 分。小组人员一人一次射击机会，累加得分。",
     passCondition: "累加得分超过 8 分，即可通关。",
-    image: "",
+    image: "images/duzhilou.jpg",
   },
 ];
 
