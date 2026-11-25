@@ -228,7 +228,7 @@ function updateProgress() {
 function renderTask() {
   const a = ordered[curStep];
   const media = a.image
-    ? `<img src="${a.image}" alt="${a.name}">`
+    ? `<img src="${a.image}" alt="${a.name}" class="${a.portrait ? "portrait" : ""}">`
     : `<div class="media-ph">${leafSVG("", 64)}<p>图片占位 · 后续补充</p></div>`;
   const card = document.getElementById("taskCard");
   if (!card) return;

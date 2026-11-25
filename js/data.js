@@ -8,8 +8,8 @@
 const SITE = {
   title: "乐游文华",
   slogan: "乘枫启航 · 逐梦前行",
-  date: "11 月 28 日",
-  dateFull: "2026 年 11 月 28 日",
+  date: "11 月 29 日",
+  dateFull: "2026 年 11 月 29 日",
   location: "文华学院",
   intro:
     "机械与电气工程学部联合经管学部共同举办的校园定向越野活动。2026 级新生组队闯关，沿路线完成一个个游戏挑战，集齐 5 枚印章即为挑战成功，前往主席台合影留念！",
@@ -82,7 +82,8 @@ const ACTIVITIES = [
     description: "只能答 yes/no，靠反馈引导表演者完成动作。",
     rules: "团队内部先商议、推选一名队员作为表演者，其余队员抽取写有指定动作的纸条。游戏开始后，抽取纸条的队员不能直接说出、比划纸条上的动作内容，仅能向表演者回复 yes 或 no。表演者不断尝试做出不同动作，根据反馈调整，直到准确完成纸条上规定的动作。",
     passCondition: "表演者准确完成纸条规定动作，即为挑战成功。",
-    image: "",
+    image: "images/wenhuaguangchang.jpg",
+    portrait: true,
   },
   {
     id: 8,
@@ -91,7 +92,8 @@ const ACTIVITIES = [
     description: "轮流移动单字卡牌，合力拼出完整诗句。",
     rules: "团队成员排成一列纵队，诗句拆分为单字卡牌，分散打乱摆放。队员按排队顺序依次上场，一轮当中每人只可以移动一张字卡，移动完成后立刻换下一名队员，循环接力调整卡牌位置。队员之间可以互相沟通商量，不断调整字卡排布。",
     passCondition: "按顺序拼出完整、正确的诗句，即挑战完成。",
-    image: "",
+    image: "images/wenhuaguangchang.jpg",
+    portrait: true,
   },
   {
     id: 9,

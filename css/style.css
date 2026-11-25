@@ -290,6 +290,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 .task-media { position: relative; background: var(--bg-warm); min-height: 320px; }
 .task-media img { width: 100%; height: 100%; object-fit: cover; }
+.task-media img.portrait { object-fit: contain; }
 .media-ph {
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
@@ -399,6 +400,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   .task-card { grid-template-columns: 1fr; }
   .task-media { min-height: 200px; }
   .task-media img { height: 220px; }
+  .task-media img.portrait { height: auto; }
   .ov-item { grid-template-columns: 54px 1fr; }
   .ov-num { width: 50px; height: 50px; font-size: 19px; }
   .ov-go { grid-column: 1 / -1; justify-content: center; }
@@ -409,9 +411,11 @@ button { font-family: inherit; cursor: pointer; border: none; }
   .nav-links a { padding: 6px 12px; font-size: 13px; }
   .hero { padding: 48px 0 40px; }
   .deco-leaf { width: 46px; height: 46px; opacity: 0.2; }
+  .section { padding: 40px 0; }
   .task-body { padding: 26px 22px; }
-  .task-nav { flex-direction: column; }
-  .task-nav .dots { order: 3; }
+  .task-nav { flex-wrap: wrap; }
+  .task-nav .btn { flex: 1; min-width: 0; }
+  .task-nav .dots { order: -1; width: 100%; }
 }
 
 /* ---------- 首页路线列表 ---------- */
