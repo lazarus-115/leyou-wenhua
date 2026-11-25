@@ -46,7 +46,7 @@ const ACTIVITIES = [
     description: "两人比划、队友猜词，考验团队默契。",
     rules: "队内选派两名队员共同看词比划，不能说出词语中的字，其余队友猜词。",
     passCondition: "限时猜对指定数量，即可通关。",
-    image: "",
+    image: "https://naistudio.art/assets/uploads/wenhua-4d1382f154.jpg",
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ const ACTIVITIES = [
     description: "每人手拿一本书，接力运送乒乓球到终点。",
     rules: "每队 5 人，每人手拿一本书，依次衔接，将一颗乒乓球从起点平稳运送至终点的容器中，小球中途落地需重新开始。",
     passCondition: "成功送达终点，即可通关。",
-    image: "",
+    image: "https://naistudio.art/assets/uploads/wenhua-4d1382f154.jpg",
   },
   {
     id: 5,
