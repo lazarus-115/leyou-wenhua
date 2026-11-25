@@ -38,23 +38,18 @@
         <p class="slogan" id="heroSlogan">游戏任务 · 校园巡游</p>
         <p class="intro" id="heroIntro"></p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="guide.html">开始旅程 →</a>
+          <a class="btn btn-primary" href="#routes">选择路线 →</a>
           <a class="btn btn-ghost" href="overview.html">查看任务总览</a>
         </div>
         <div class="info-strip" id="infoStrip"></div>
       </div>
     </section>
 
-    <section class="section lottery" id="lottery">
+    <section class="section routes" id="routes">
       <div class="container">
-        <h2 class="section-title">抽取你的专属路线</h2>
-        <p class="section-sub">转一转，随机抽出一条巡游路线</p>
-        <div class="wheel-wrap">
-          <div class="wheel-pointer">▼</div>
-          <div class="wheel" id="wheel"></div>
-          <button class="btn btn-primary wheel-btn" id="spinBtn">🎯 开始抽取</button>
-        </div>
-        <p class="wheel-hint">抽中后，流程向导会按这条路线的顺序带你闯关</p>
+        <h2 class="section-title">五条巡游路线</h2>
+        <p class="section-sub">选择一条路线，跟着顺序闯关集章</p>
+        <div class="route-list" id="routeList"></div>
       </div>
     </section>
 
@@ -65,25 +60,25 @@
         <div class="features">
           <div class="feature">
             <div class="f-ico">🎫</div>
-            <h3>领取任务卡</h3>
-            <p>在校门广场集合，领取任务卡与校园地图，开启旅程。</p>
+            <h3>组队集结</h3>
+            <p>活动当天组队集合，领取集章卡，从五条路线中选择一条开启旅程。</p>
           </div>
           <div class="feature">
             <div class="f-ico">🎯</div>
-            <h3>按序闯关</h3>
-            <p>沿着路线完成一个个游戏任务，边玩边赏校园风景。</p>
+            <h3>按路线闯关</h3>
+            <p>沿所选路线依次前往 5 个游戏点位，完成挑战集齐印章。</p>
           </div>
           <div class="feature">
             <div class="f-ico">🏆</div>
-            <h3>集章兑奖</h3>
-            <p>集齐印章，到终点兑换专属奖品与完赛证书。</p>
+            <h3>集章评比</h3>
+            <p>集齐 5 枚印章前往主席台合影，凭闯关表现参与评比赢取奖品。</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="section" style="text-align:center">
-      <a class="btn btn-primary" href="guide.html">立即开始闯关 →</a>
+      <a class="btn btn-primary" href="#routes">选择路线开始闯关 →</a>
     </section>
   </main>
 
@@ -92,21 +87,6 @@
     <p>乐游文华 · 文华学院</p>
     <p id="footDate"></p>
   </footer>
-
-  <!-- 抽取结果弹窗 -->
-  <div class="modal" id="resultModal" aria-hidden="true">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-card">
-      <div class="modal-emoji" id="modalEmoji">🍁</div>
-      <h3 class="modal-title">你抽到了</h3>
-      <div class="modal-route" id="modalRoute">枫红之路</div>
-      <p class="modal-order" id="modalOrder"></p>
-      <div class="modal-actions">
-        <a class="btn btn-primary" id="goRoute" href="guide.html">进入这条路线 →</a>
-        <button class="btn btn-ghost" id="reSpin">再抽一次</button>
-      </div>
-    </div>
-  </div>
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

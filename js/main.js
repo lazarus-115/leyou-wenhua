@@ -76,26 +76,50 @@ function renderHome() {
   document.getElementById("infoStrip").innerHTML = `
     <div class="info-chip"><span class="ico">📅</span><span>${SITE.dateFull}</span></div>
     <div class="info-chip"><span class="ico">📍</span><span>${SITE.location}</span></div>
-    <div class="info-chip"><span class="ico">🎯</span><span>${ACTIVITIES.length} 个任务点</span></div>`;
+    <div class="info-chip"><span class="ico">🎯</span><span>${ACTIVITIES.length} 个游戏 · ${ROUTES.length} 条路线</span></div>`;
+}
+
+// 首页：静态展示五条路线
+function renderRouteList() {
+  const list = document.getElementById("routeList");
+  if (!list) return;
+  list.innerHTML = ROUTES.map((r, i) => {
+    const games = r.order.map((id) => ACTIVITIES.find((a) => a.id === id));
+    const path = games.map((g) => `${g.location} · ${g.name}`).join("  →  ");
+    return `
+      <a class="route-card" href="guide.html?route=${i}">
+        <div class="route-head">
+          <span class="route-num">${i + 1}</span>
+          <h3>${r.name}</h3>
+        </div>
+        <p class="route-path">${path}</p>
+        <span class="route-go">进入路线 →</span>
+      </a>`;
+  }).join("");
 }
 
 // ---------- 总览页 ----------
+// 找到包含某游戏的第一个路线下标（用于「去闯关」跳转）
+function routeForGame(gameId) {
+  const idx = ROUTES.findIndex((r) => r.order.includes(gameId));
+  return idx >= 0 ? idx : 0;
+}
+
 function renderOverview() {
   document.title = `任务总览 · ${SITE.title}`;
   const sub = document.getElementById("ovSub");
   if (sub)
-    sub.textContent = `${SITE.dateFull} · ${SITE.location} · 共 ${ACTIVITIES.length} 站`;
+    sub.textContent = `${SITE.dateFull} · ${SITE.location} · 共 ${ACTIVITIES.length} 个游戏`;
   const list = document.getElementById("ovList");
   if (!list) return;
   list.innerHTML = ACTIVITIES.map(
     (a) => `
-    <a class="ov-item" href="guide.html?step=${a.id}">
+    <a class="ov-item" href="guide.html?route=${routeForGame(a.id)}&step=${a.id}">
       <div class="ov-num">${a.id}</div>
       <div class="ov-info">
         <h3>${a.name}</h3>
         <div class="ov-meta">
           <span class="loc">📍 ${a.location}</span>
-          <span>🕐 ${a.time}</span>
           <span>${a.description}</span>
         </div>
       </div>
@@ -104,104 +128,9 @@ function renderOverview() {
   ).join("");
 }
 
-// ---------- 转盘抽取（首页） ----------
-let spinning = false;
-let currentDeg = 0;
-
-function renderWheel() {
-  const wheel = document.getElementById("wheel");
-  const btn = document.getElementById("spinBtn");
-  if (!wheel) return;
-
-  // 四份扇形颜色（红橙主题）
-  const colors = ["#e2383a", "#ff8c3a", "#c9473f", "#f2a33c"];
-  const seg = ROUTES.map(
-    (r, i) => `${colors[i % colors.length]} ${i * 90}deg ${(i + 1) * 90}deg`
-  ).join(", ");
-  wheel.style.background = `conic-gradient(${seg})`;
-
-  // 四个路线名标签，放在每个扇区中心偏外处（文字保持水平可读）
-  wheel.innerHTML = ROUTES.map((r, i) => {
-    const ang = ((i * 90 + 45) * Math.PI) / 180;
-    const rx = 0.34;
-    const left = 50 + rx * 100 * Math.sin(ang);
-    const top = 50 - rx * 100 * Math.cos(ang);
-    return `<span class="wheel-label" style="left:${left}%; top:${top}%">${r.name}</span>`;
-  }).join("");
-
-  if (btn) btn.addEventListener("click", spinWheel);
-}
-
-function spinWheel() {
-  if (spinning) return;
-  spinning = true;
-  const wheel = document.getElementById("wheel");
-  const btn = document.getElementById("spinBtn");
-  if (btn) btn.disabled = true;
-
-  // 随机选一条路线
-  const target = Math.floor(Math.random() * ROUTES.length);
-  // 扇区中心角度 target*90+45，加 ±32 度抖动让指针停在扇区内
-  const jitter = (Math.random() - 0.5) * 64;
-  // 指针固定在顶部（12 点），要让指针停在 target 扇区：
-  const base = 360 - (target * 90 + 45 + jitter);
-  const spins = 5;
-  const finalDeg = spins * 360 + base;
-
-  // 先回到当前角度的模 360，再叠加新旋转，支持连续抽取
-  wheel.style.transition = "none";
-  wheel.style.transform = `rotate(${currentDeg % 360}deg)`;
-  void wheel.offsetWidth;
-
-  wheel.style.transition = "transform 4s cubic-bezier(0.16, 0.9, 0.3, 1)";
-  wheel.style.transform = `rotate(${currentDeg + finalDeg}deg)`;
-  currentDeg = currentDeg + finalDeg;
-
-  wheel.addEventListener("transitionend", function onEnd(e) {
-    if (e.propertyName !== "transform") return;
-    wheel.removeEventListener("transitionend", onEnd);
-    spinning = false;
-    if (btn) btn.disabled = false;
-    showResult(target);
-  });
-}
-
-function showResult(idx) {
-  const route = ROUTES[idx];
-  localStorage.setItem("leyouRoute", String(idx));
-
-  const emoji = document.getElementById("modalEmoji");
-  const routeEl = document.getElementById("modalRoute");
-  const orderEl = document.getElementById("modalOrder");
-  if (emoji) emoji.textContent = route.emoji;
-  if (routeEl) routeEl.textContent = route.name;
-  if (orderEl) {
-    const names = route.order.map((id) => {
-      const a = ACTIVITIES.find((x) => x.id === id);
-      return a ? a.name : id;
-    });
-    orderEl.textContent = "任务顺序：" + names.join(" → ");
-  }
-  const modal = document.getElementById("resultModal");
-  if (modal) modal.classList.add("open");
-}
-
-function closeModal() {
-  const modal = document.getElementById("resultModal");
-  if (modal) modal.classList.remove("open");
-}
-
-function bindModal() {
-  const backdrop = document.getElementById("modalBackdrop");
-  const reSpin = document.getElementById("reSpin");
-  if (backdrop) backdrop.addEventListener("click", closeModal);
-  if (reSpin) reSpin.addEventListener("click", closeModal);
-}
-
-// ---------- 路线（转盘抽取结果） ----------
-// 从 localStorage 读取抽中的路线下标，没有则默认第 1 条
+// ---------- 路线（从 URL 参数读取，默认第 1 条） ----------
 function getRouteIndex() {
-  const v = parseInt(localStorage.getItem("leyouRoute"), 10);
+  const v = parseInt(new URLSearchParams(location.search).get("route"), 10);
   return Number.isInteger(v) && v >= 0 && v < ROUTES.length ? v : 0;
 }
 function getRoute() {
@@ -223,11 +152,11 @@ function initGuide() {
   const tc = document.getElementById("totalCount");
   if (tc) tc.textContent = total;
 
-  // 顶部显示当前抽中的路线
+  // 顶部显示当前路线
   const rb = document.getElementById("routeBadge");
-  if (rb) rb.textContent = `${getRoute().emoji} 当前路线 · ${getRoute().name}`;
+  if (rb) rb.textContent = `当前路线 · ${getRoute().name}`;
 
-  // 支持 ?step=任务id 从总览页直接跳到该任务（映射到当前路线里的位置）
+  // 支持 ?step=游戏id 从总览页直接跳到该游戏（映射到当前路线里的位置）
   const q = new URLSearchParams(location.search).get("step");
   if (q) {
     const id = parseInt(q, 10);
@@ -308,7 +237,7 @@ function renderTask() {
     <div class="task-body">
       <span class="task-tag">${leafSVG("leaf-sm")} 第 ${curStep + 1} 站</span>
       <h2>${a.name}</h2>
-      <div class="task-loc">📍 ${a.location} · 🕐 ${a.time}</div>
+      <div class="task-loc">📍 ${a.location}</div>
       <p class="task-desc">${a.description}</p>
       <div class="task-block">
         <h4>📋 任务规则</h4>
@@ -361,8 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   if (page === "home") {
     renderHome();
-    renderWheel();
-    bindModal();
+    renderRouteList();
   }
   if (page === "guide") initGuide();
   if (page === "overview") renderOverview();
