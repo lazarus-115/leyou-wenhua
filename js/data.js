@@ -18,7 +18,7 @@ const SITE = {
 // 活动主要策划人（页脚低调展示，改这里即可）
 const CREW = ["吴自圩", "马国庆", "谢小芳", "焦希艾", "黎先钊", "毛景丹", "陈鹭飞"];
 
-// 游戏点位列表（共 10 个游戏，分布在校训石 / 勤仁坡 / 工程实训楼 / 文华广场 / 笃志楼）
+// 游戏点位列表（共 10 个游戏，分布在校训石 / 勤仁坡 / 体育馆 / 文华广场 / 笃志楼）
 // image 字段留空表示暂无图片，页面会显示图片占位框
 const ACTIVITIES = [
   {
@@ -60,20 +60,20 @@ const ACTIVITIES = [
   {
     id: 5,
     name: "时序逐光",
-    location: "工程实训楼",
+    location: "体育馆",
     description: "记忆历史事件顺序，合力调整卡片排列。",
     rules: "游戏正式开始前，全队统一观看顺序表 30 秒；随后收起表格。轮到每位队员上前调整卡片前，该队员可单独观看 15 秒顺序表。队员依次上前调整卡片位置，全队可沟通讨论。",
     passCondition: "所有历史事件按先后顺序排列正确，即为闯关成功。",
-    image: "images/gongcheng.jpg",
+    image: "images/tiyuguan.jpg",
   },
   {
     id: 6,
     name: "夹乒乓球接力",
-    location: "工程实训楼",
+    location: "体育馆",
     description: "用工具夹取乒乓球，全队接力累计积分。",
     rules: "队伍成员依次接力上场夹取乒乓球，每支队伍单独计时，选手在规定时长内使用工具夹球，按全队成功夹取的乒乓球总数累计积分。",
     passCondition: "积分达到标准，即可通关。",
-    image: "images/gongcheng.jpg",
+    image: "images/tiyuguan.jpg",
   },
   {
     id: 7,
@@ -83,7 +83,6 @@ const ACTIVITIES = [
     rules: "团队内部先商议、推选一名队员作为表演者，其余队员抽取写有指定动作的纸条。游戏开始后，抽取纸条的队员不能直接说出、比划纸条上的动作内容，仅能向表演者回复 yes 或 no。表演者不断尝试做出不同动作，根据反馈调整，直到准确完成纸条上规定的动作。",
     passCondition: "表演者准确完成纸条规定动作，即为挑战成功。",
     image: "images/wenhuaguangchang.jpg",
-    portrait: true,
   },
   {
     id: 8,
@@ -93,7 +92,6 @@ const ACTIVITIES = [
     rules: "团队成员排成一列纵队，诗句拆分为单字卡牌，分散打乱摆放。队员按排队顺序依次上场，一轮当中每人只可以移动一张字卡，移动完成后立刻换下一名队员，循环接力调整卡牌位置。队员之间可以互相沟通商量，不断调整字卡排布。",
     passCondition: "按顺序拼出完整、正确的诗句，即挑战完成。",
     image: "images/wenhuaguangchang.jpg",
-    portrait: true,
   },
   {
     id: 9,
